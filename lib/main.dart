@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:provider/provider.dart';
 
 // import 'app/providers/firebase_provider.dart';
+import 'app/modules/auth/controllers/google_controller.dart';
 import 'app/providers/laravel_provider.dart';
 import 'app/routes/theme1_app_pages.dart';
 import 'app/services/auth_service.dart';
@@ -31,24 +33,38 @@ void main() async {
   await initServices();
 
   runApp(
-    GetMaterialApp(
-      title: Get.find<SettingsService>().setting.value.appName,
-      initialRoute: Theme1AppPages.INITIAL,
-      // onReady: () async {
-      //   await Get.putAsync(() => FireBaseMessagingService().init());
-      // },
-      getPages: Theme1AppPages.routes,
-      localizationsDelegates: GlobalMaterialLocalizations.delegates,
-      supportedLocales: Get.find<TranslationService>().supportedLocales(),
-      translationsKeys: Get.find<TranslationService>().translations,
-      locale: Get.find<TranslationService>().getLocale(),
-      fallbackLocale: Get.find<TranslationService>().getLocale(),
-      debugShowCheckedModeBanner: false,
-      defaultTransition: Transition.cupertino,
-      themeMode: Get.find<SettingsService>().getThemeMode(),
-      theme: Get.find<SettingsService>().getLightTheme(),
-      darkTheme: Get.find<SettingsService>().getDarkTheme(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => GoogleSignInProvider(),
+        ),
+        // add more providers here if needed
+      ],
+      child: GetMaterialApp(
+        title: Get.find<SettingsService>().setting.value.appName,
+        initialRoute: Theme1AppPages.INITIAL,
+        // onReady: () async {
+        //   await Get.putAsync(() => FireBaseMessagingService().init());
+        // },
+        getPages: Theme1AppPages.routes,
+        localizationsDelegates: GlobalMaterialLocalizations.delegates,
+        supportedLocales: Get.find<TranslationService>().supportedLocales(),
+        translationsKeys: Get.find<TranslationService>().translations,
+        locale: Get.find<TranslationService>().getLocale(),
+        fallbackLocale: Get.find<TranslationService>().getLocale(),
+        debugShowCheckedModeBanner: false,
+        defaultTransition: Transition.cupertino,
+        themeMode: Get.find<SettingsService>().getThemeMode(),
+        theme: Get.find<SettingsService>().getLightTheme(),
+        darkTheme: Get.find<SettingsService>().getDarkTheme(),
+      ),
     ),
   );
 }
+
+
+
+
+
+
 

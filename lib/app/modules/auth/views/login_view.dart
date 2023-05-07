@@ -11,6 +11,8 @@ import '../../global_widgets/circular_loading_widget.dart';
 import '../../global_widgets/text_field_widget.dart';
 import '../../root/controllers/root_controller.dart';
 import '../controllers/auth_controller.dart';
+import 'package:provider/provider.dart';
+import '../controllers/google_controller.dart';
 
 class LoginView extends GetView<AuthController> {
   final Setting _settings = Get.find<SettingsService>().setting.value;
@@ -39,7 +41,7 @@ class LoginView extends GetView<AuthController> {
                         children: [
                           SizedBox(height: 5),
                           Image.asset(
-                            'assets/icon/icon.png',
+                            'assets/icon/icon.png'
                           ),
                           // Text("Fill the following credentials to login your account", style: Get.textTheme.caption.merge(TextStyle(color: Get.theme.primaryColor))),
                         ],
@@ -115,6 +117,19 @@ class LoginView extends GetView<AuthController> {
                           ),
                         ],
                       ).paddingSymmetric(vertical: 20),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     final provider =
+                        //     Provider.of<GoogleSignInProvider>(
+                        //         context,
+                        //         listen: false);
+                        //     provider.googleLogin();
+                        //   },
+                        //   child: Image.asset(
+                        //     "assets/icon/google.png",
+                        //     height: 100,
+                        //   ),
+                        // ),
                     ],
                   );
                 }

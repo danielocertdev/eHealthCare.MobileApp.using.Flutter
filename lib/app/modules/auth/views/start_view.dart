@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../common/helper.dart';
-import '../../../../common/ui.dart';
 import '../../../models/setting_model.dart';
 import '../../../routes/app_routes.dart';
 import '../../../services/settings_service.dart';
-import '../../root/controllers/root_controller.dart';
 import '../controllers/auth_controller.dart';
+import 'package:provider/provider.dart';
+import '../controllers/google_controller.dart';
 
 class StartView extends GetView<AuthController> {
   final Setting _settings = Get.find<SettingsService>().setting.value;
@@ -51,7 +51,9 @@ class StartView extends GetView<AuthController> {
                               children: [
                                 Text(
                                   "Login".tr,
-                                  style: Get.textTheme.subtitle1.merge(TextStyle(color: Colors.black, fontSize: 22)),
+                                  style: Get.textTheme.subtitle1.merge(
+                                      TextStyle(
+                                          color: Colors.black, fontSize: 22)),
                                 ),
                               ],
                             ),
@@ -73,7 +75,9 @@ class StartView extends GetView<AuthController> {
                               children: [
                                 Text(
                                   "Create Account".tr,
-                                  style: Get.textTheme.subtitle1.merge(TextStyle(color: Colors.white, fontSize: 20)),
+                                  style: Get.textTheme.subtitle1.merge(
+                                      TextStyle(
+                                          color: Colors.white, fontSize: 20)),
                                 ),
                               ],
                             ),
@@ -84,23 +88,29 @@ class StartView extends GetView<AuthController> {
                             children: [
                               Expanded(
                                 child: GestureDetector(
-                                  onTap: (){
-
+                                  onTap: () {
+                                    final provider =
+                                        Provider.of<GoogleSignInProvider>(
+                                            context,
+                                            listen: false);
+                                    provider.googleLogin();
                                   },
-                                  child: Image.asset("assets/icon/google.png", height: 100,),
-
+                                  child: Image.asset(
+                                    "assets/icon/google.png",
+                                    height: 100,
+                                  ),
                                 ),
                               ),
-                          //     Expanded(
-                          //       child: GestureDetector(
-                          //         onTap: (){
-                          //           controller.loginWithFacebook();
-                          //         },
-                          //         child: Image.asset("assets/icon/facebook.png", height: 100,),
-                          //       ),
-                          //     ),
+                              //     Expanded(
+                              //       child: GestureDetector(
+                              //         onTap: (){
+                              //           controller.loginWithFacebook();
+                              //         },
+                              //         child: Image.asset("assets/icon/facebook.png", height: 100,),
+                              //       ),
+                              //     ),
                             ],
-                          //
+                            //
                           )
                         ],
                       ),
@@ -115,10 +125,3 @@ class StartView extends GetView<AuthController> {
     );
   }
 }
-
-
-
-
-
-
-

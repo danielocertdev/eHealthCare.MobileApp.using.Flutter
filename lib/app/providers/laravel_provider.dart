@@ -111,6 +111,8 @@ class LaravelApiClient extends GetxService with ApiClient {
   Future<User> login(User user) async {
     Uri _uri = getApiBaseUri("login");
     Get.log(_uri.toString());
+    print(user);
+    print('xxx');
     var response = await _httpClient.postUri(
       _uri,
       data: json.encode(user.toJson()),
@@ -123,6 +125,35 @@ class LaravelApiClient extends GetxService with ApiClient {
       return User.fromJson(response.data['data']);
     } else {
       throw new Exception(response.data['message']);
+    }
+  }
+
+  Future<User> googlelogin(User user) async {
+    Uri _uri = getApiBaseUri("login");
+    Get.log(_uri.toString());
+    var response = await _httpClient.postUri(
+      _uri,
+      data: json.encode(user.toJson()),
+      options: _optionsNetwork,
+    );
+    if (response.data['success'] == true) {
+      response.data['data']['auth'] = true;
+      return User.fromJson(response.data['data']);
+    } else {
+
+      Uri _uri = getApiBaseUri("register");
+      Get.log(_uri.toString());
+      var response = await _httpClient.postUri(
+        _uri,
+        data: json.encode(user.toJson()),
+        options: _optionsNetwork,
+      );
+      if (response.data['success'] == true) {
+        response.data['data']['auth'] = true;
+        return User.fromJson(response.data['data']);
+      } else {
+        throw new Exception(response.data['message']);
+      }
     }
   }
 

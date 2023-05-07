@@ -1,28 +1,61 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import '../../../services/auth_service.dart';
+import '../../../models/user_model.dart';
+import '../../../repositories/user_repository.dart';
+import '../../root/controllers/root_controller.dart';
+
 
 class GoogleSignInProvider extends ChangeNotifier {
+  final Rx<User> currentUser = Get.find<AuthService>().user;
+  final loading = false.obs;
+  UserRepository _userRepository;
+
+  GoogleSignInProvider() {
+    _userRepository = UserRepository();
+  }
+
   final googleSignIn = GoogleSignIn();
 
   GoogleSignInAccount _user;
-
   GoogleSignInAccount get user => _user;
 
   Future googleLogin() async {
-    final googleUser = await googleSignIn.signIn();
-    if(googleUser == null) return;
-    _user = googleUser;
+    loading.value = true;
+    try{
+      final googleUser = await googleSignIn.signIn();
+      if(googleUser == null) return;
+      _user = googleUser;
+      final googleAuth = await googleUser.authentication;
+      // final credential = GoogleAuthProvider.credential(
+      //   accessToken: googleAuth.accessToken,
+      //   idToken: googleAuth.idToken,
+      // );
+      // await FirebaseAuth.instance.signInWithCredential(credential);
 
-    final googleAuth = await googleUser.authentication;
+      currentUser.value.email = _user.email;
+      currentUser.value.name = _user.displayName;
+      currentUser.value.password = "googleuserpassword";
+      currentUser.value.phoneNumber = "";
 
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    
-    await FirebaseAuth.instance.signInWithCredential(credential);
+      currentUser.value = await _userRepository.googlelogin(currentUser.value);
+      await Get.find<RootController>().changePage(0);
 
+    } catch (e) {
+      print(e.toString());
+    }finally {
+      loading.value = false;
+    }
     notifyListeners();
+  }
+
+  Future logout () async {
+    _user = null;
+    currentUser.value = null;
+    await googleSignIn.disconnect();
+    // FirebaseAuth.instance.signOut();
   }
 }

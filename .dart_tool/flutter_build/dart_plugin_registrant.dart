@@ -22,6 +22,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider_linux/path_provider_linux.dart';
 import 'package:shared_preferences_linux/shared_preferences_linux.dart';
 import 'package:url_launcher_linux/url_launcher_linux.dart';
+import 'package:facebook_auth_desktop/facebook_auth_desktop.dart';
 import 'package:geolocator_apple/geolocator_apple.dart';
 import 'package:path_provider_foundation/path_provider_foundation.dart';
 import 'package:shared_preferences_foundation/shared_preferences_foundation.dart';
@@ -200,6 +201,16 @@ class _PluginRegistrant {
       }
 
     } else if (Platform.isMacOS) {
+      try {
+        FacebookAuthDesktopPlugin.registerWith();
+      } catch (err) {
+        print(
+          '`facebook_auth_desktop` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+        rethrow;
+      }
+
       try {
         GeolocatorApple.registerWith();
       } catch (err) {

@@ -12,6 +12,7 @@ import '../../../services/auth_service.dart';
 // import '../../../services/firebase_messaging_service.dart';
 import '../../../services/settings_service.dart';
 import '../../root/controllers/root_controller.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 
 class AuthController extends GetxController {
@@ -50,24 +51,28 @@ class AuthController extends GetxController {
     }
   }
 
-  // void loginWithFacebook() async {
-  //   final FacebookLogin facebookLogin = FacebookLogin();
-  //   final result = await facebookLogin.logIn(['email']);
-  //   print('111111');
-  //   switch (result.status) {
-  //     case FacebookLoginStatus.loggedIn:
-  //       final token = result.accessToken.token;
-  //       print('Access Token: $token');
-  //       break;
-  //     case FacebookLoginStatus.cancelledByUser:
-  //       print('Login cancelled by the user.');
-  //       break;
-  //     case FacebookLoginStatus.error:
-  //       print('Something went wrong with the login process.\n'
-  //           'Here\'s the error Facebook gave us: ${result.errorMessage}');
-  //       break;
-  //   }
-  // }
+  void loginWithFacebook() async {
+    loading.value = true;
+    try{
+      await FacebookAuth.instance.logOut();
+      await FacebookAuth.instance.login();
+      final userData = await FacebookAuth.instance.getUserData();
+      print(userData);
+
+      currentUser.value.email = userData['email'];
+      currentUser.value.name = userData['name'];
+      currentUser.value.password = "googleuserpassword";
+      currentUser.value.phoneNumber = "";
+
+      currentUser.value = await _userRepository.googlelogin(currentUser.value);
+      await Get.find<RootController>().changePage(0);
+
+    } catch (e) {
+      print(e.toString());
+    }finally {
+      loading.value = false;
+    }
+  }
 
   void register() async {
     Get.focusScope.unfocus();

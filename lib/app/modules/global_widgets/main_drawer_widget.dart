@@ -11,6 +11,7 @@ import '../../services/auth_service.dart';
 import '../../services/settings_service.dart';
 import '../custom_pages/views/custom_page_drawer_link_widget.dart';
 import '../root/controllers/root_controller.dart' show RootController;
+import '../../modules/auth/controllers/google_controller.dart';
 import 'drawer_link_widget.dart';
 
 class MainDrawerWidget extends StatelessWidget {
@@ -100,14 +101,14 @@ class MainDrawerWidget extends StatelessWidget {
               await Get.find<RootController>().changePage(0);
             },
           ),
-          // Divider(color: Colors.black),
-          // DrawerLinkWidget(
-          //   icon: Icons.folder_special_outlined,
-          //   text: "Specialities",
-          //   onTap: (e) {
-          //     Get.offAndToNamed(Routes.SPECIALITIES);
-          //   },
-          // ),
+          Divider(color: Colors.black),
+          DrawerLinkWidget(
+            icon: Icons.folder_special_outlined,
+            text: "Specialities",
+            onTap: (e) {
+              Get.offAndToNamed(Routes.SPECIALITIES);
+            },
+          ),
           Divider(color: Colors.black),
           DrawerLinkWidget(
             icon: Icons.notifications_none_outlined,
@@ -116,47 +117,47 @@ class MainDrawerWidget extends StatelessWidget {
               Get.offAndToNamed(Routes.NOTIFICATIONS);
             },
           ),
-          // Divider(color: Colors.black),
-          // DrawerLinkWidget(
-          //   icon: Icons.assignment_outlined,
-          //   text: "My Appointments",
-          //   onTap: (e) async {
-          //     Get.back();
-          //     await Get.find<RootController>().changePage(1);
-          //   },
-          // ),
-          // Divider(color: Colors.black),
-          // DrawerLinkWidget(
-          //   icon: Icons.group_outlined,
-          //   text: "Patients",
-          //   onTap: (e) async {
-          //     Get.back();
-          //     Get.find<RootController>().changePage(3);
-          //   },
-          // ),
+          Divider(color: Colors.black),
+          DrawerLinkWidget(
+            icon: Icons.assignment_outlined,
+            text: "My Appointments",
+            onTap: (e) async {
+              Get.back();
+              await Get.find<RootController>().changePage(1);
+            },
+          ),
+          Divider(color: Colors.black),
+          DrawerLinkWidget(
+            icon: Icons.group_outlined,
+            text: "Patients",
+            onTap: (e) async {
+              Get.back();
+              Get.find<RootController>().changePage(3);
+            },
+          ),
 
-          // DrawerLinkWidget(
-          //   icon: Icons.favorite_outline,
-          //   text: "Favorites",
-          //   onTap: (e) async {
-          //     await Get.offAndToNamed(Routes.FAVORITES);
-          //   },
-          // ),
-          // DrawerLinkWidget(
-          //   icon: Icons.chat_outlined,
-          //   text: "Messages",
-          //   onTap: (e) async {
-          //     Get.back();
-          //     await Get.find<RootController>().changePage(2);
-          //   },
-          // ),
-          // DrawerLinkWidget(
-          //   icon: Icons.account_balance_wallet_outlined,
-          //   text: "Wallets",
-          //   onTap: (e) async {
-          //     await Get.offAndToNamed(Routes.WALLETS);
-          //   },
-          // ),
+          DrawerLinkWidget(
+            icon: Icons.favorite_outline,
+            text: "Favorites",
+            onTap: (e) async {
+              await Get.offAndToNamed(Routes.FAVORITES);
+            },
+          ),
+          DrawerLinkWidget(
+            icon: Icons.chat_outlined,
+            text: "Messages",
+            onTap: (e) async {
+              Get.back();
+              await Get.find<RootController>().changePage(2);
+            },
+          ),
+          DrawerLinkWidget(
+            icon: Icons.account_balance_wallet_outlined,
+            text: "Wallets",
+            onTap: (e) async {
+              await Get.offAndToNamed(Routes.WALLETS);
+            },
+          ),
           Divider(color: Colors.black),
           DrawerLinkWidget(
             icon: Icons.settings_outlined,
@@ -181,8 +182,9 @@ class MainDrawerWidget extends StatelessWidget {
                 text: "Logout",
                 onTap: (e) async {
                   await Get.find<AuthService>().removeCurrentUser();
+                  await Get.find<GoogleSignInProvider>().logout();
                   Get.back();
-                  await Get.find<RootController>().changePage(3);
+                  // await Get.find<RootController>().changePage(0);
                 },
               );
             } else {

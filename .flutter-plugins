@@ -1,6 +1,7 @@
 # This is a generated file; do not edit or check into version control.
 cloud_firestore=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\cloud_firestore-4.3.1\\
 cloud_firestore_web=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\cloud_firestore_web-3.2.1\\
+facebook_auth_desktop=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\facebook_auth_desktop-0.0.9\\
 firebase_auth=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_auth-4.2.5\\
 firebase_auth_web=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_auth_web-5.2.4\\
 firebase_core=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_core-2.4.1\\
@@ -9,7 +10,14 @@ firebase_messaging=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\
 firebase_messaging_web=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_messaging_web-3.2.11\\
 firebase_storage=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_storage-11.0.10\\
 firebase_storage_web=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_storage_web-3.3.19\\
+flutter_facebook_auth=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\flutter_facebook_auth-5.0.11\\
+flutter_facebook_auth_web=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\flutter_facebook_auth_web-4.1.1\\
 flutter_plugin_android_lifecycle=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\flutter_plugin_android_lifecycle-2.0.7\\
+flutter_secure_storage=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\flutter_secure_storage-8.0.0\\
+flutter_secure_storage_linux=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\flutter_secure_storage_linux-1.1.3\\
+flutter_secure_storage_macos=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\flutter_secure_storage_macos-3.0.0\\
+flutter_secure_storage_web=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\flutter_secure_storage_web-1.1.1\\
+flutter_secure_storage_windows=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\flutter_secure_storage_windows-2.0.0\\
 geolocator=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\geolocator-9.0.2\\
 geolocator_android=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\geolocator_android-4.1.6\\
 geolocator_apple=C:\\Users\\KSC\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\geolocator_apple-2.2.5\\

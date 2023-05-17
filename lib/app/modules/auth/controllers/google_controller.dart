@@ -7,6 +7,8 @@ import '../../../services/auth_service.dart';
 import '../../../models/user_model.dart';
 import '../../../repositories/user_repository.dart';
 import '../../root/controllers/root_controller.dart';
+import '../../../routes/app_routes.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 
 class GoogleSignInProvider extends ChangeNotifier {
@@ -26,7 +28,9 @@ class GoogleSignInProvider extends ChangeNotifier {
   Future googleLogin() async {
     loading.value = true;
     try{
+      await googleSignIn.signOut();
       final googleUser = await googleSignIn.signIn();
+
       if(googleUser == null) return;
       _user = googleUser;
       final googleAuth = await googleUser.authentication;
@@ -53,9 +57,11 @@ class GoogleSignInProvider extends ChangeNotifier {
   }
 
   Future logout () async {
+    await googleSignIn.signOut();
+    await FacebookAuth.instance.logOut();
     _user = null;
     currentUser.value = null;
-    await googleSignIn.disconnect();
+    RouteSettings(name: Routes.LOGIN);
     // FirebaseAuth.instance.signOut();
   }
 }

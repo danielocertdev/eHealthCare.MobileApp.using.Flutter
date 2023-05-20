@@ -34,12 +34,12 @@ class RootView extends GetView<RootController> {
             ),
             CustomBottomNavigationItem(
               icon: Icons.group_outlined,
-              label: "Patients".tr,
+              label: "My family".tr,
             ),
-            CustomBottomNavigationItem(
-              icon: Icons.person_outline,
-              label: "Account".tr,
-            ),
+            // CustomBottomNavigationItem(
+            //   icon: Icons.person_outline,
+            //   label: "Account".tr,
+            // ),
           ],
         ),
       );

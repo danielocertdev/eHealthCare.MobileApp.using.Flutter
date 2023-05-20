@@ -27,65 +27,14 @@ class SpecialityView extends GetView<SpecialityController> {
           physics: AlwaysScrollableScrollPhysics(),
           shrinkWrap: false,
           slivers: <Widget>[
-            SliverAppBar(
-              backgroundColor: Get.theme.scaffoldBackgroundColor,
-              expandedHeight: 280,
-              elevation: 0.5,
-              primary: true,
-              // pinned: true,
-              floating: true,
-              iconTheme: IconThemeData(color: Get.theme.primaryColor),
-              title: Text(
-                controller.speciality.value.name,
-                style: Get.textTheme.headline6.merge(TextStyle(color: Colors.black)),
-              ),
-              centerTitle: true,
-              automaticallyImplyLeading: false,
-              leading: new IconButton(
-                icon: new Icon(Icons.arrow_back_ios, color: Get.theme.primaryColor),
-                onPressed: () => {Get.back()},
-              ),
-              bottom: HomeSearchBarWidget(),
-              flexibleSpace: FlexibleSpaceBar(
-                  collapseMode: CollapseMode.parallax,
-                  background: Stack(
-                    alignment: AlignmentDirectional.bottomCenter,
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        padding: EdgeInsets.only(top: 75, bottom: 115),
-                        decoration: new BoxDecoration(
-                          gradient: new LinearGradient(
-                              colors: [Colors.purple.withOpacity(0.8), Colors.purple.withOpacity(0.3)],
-                              begin: AlignmentDirectional.topStart,
-                              //const FractionalOffset(1, 0),
-                              end: AlignmentDirectional.bottomEnd,
-                              stops: [0.1, 0.9],
-                              tileMode: TileMode.clamp),
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(5), topRight: Radius.circular(5)),
-                        ),
-                        child: (controller.speciality.value.image.url.toLowerCase().endsWith('.svg')
-                            ? SvgPicture.network(
-                                controller.speciality.value.image.url,
-                                color: controller.speciality.value.color,
-                              )
-                            : CachedNetworkImage(
-                                fit: BoxFit.fitHeight,
-                                imageUrl: controller.speciality.value.image.url,
-                                placeholder: (context, url) => Image.asset(
-                                  'assets/img/loading.gif',
-                                  fit: BoxFit.fitHeight,
-                                ),
-                                errorWidget: (context, url, error) => Icon(Icons.error_outline),
-                              )),
-                      ),
-                      AddressWidget().paddingOnly(bottom: 75),
-                    ],
-                  )).marginOnly(bottom: 42),
-            ),
             SliverToBoxAdapter(
+
               child: Wrap(
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top:50, left:30, right:30), // Add the desired padding
+                    child: HomeSearchBarWidget(),
+                  ),
                   Container(
                     height: 60,
                     child: ListView(

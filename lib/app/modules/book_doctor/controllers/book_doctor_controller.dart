@@ -173,10 +173,10 @@ class BookDoctorController extends GetxController {
         final hours2 = int.tryParse(DateFormat('HH').format(_localDateTime2));
         return hours1.compareTo(hours2);
       });
-      nightTimes.assignAll(times.sublist(0, 14));
-      morningTimes.assignAll(times.sublist(14, 24));
-      afternoonTimes.assignAll(times.sublist(24, 36));
-      eveningTimes.assignAll(times.sublist(36));
+      nightTimes.assignAll(times.sublist(0, 16));
+      morningTimes.assignAll(times.sublist(16, 48));
+      afternoonTimes.assignAll(times.sublist(48, 84));
+      eveningTimes.assignAll(times.sublist(84));
     } catch (e) {
       Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
     }
@@ -247,9 +247,9 @@ class BookDoctorController extends GetxController {
         val.patient = null;
       }
     });
-    // if (appointment.value.appointmentAt != null) {
-    //   await getTimes(date: appointment.value.appointmentAt);
-    // }
+    if (appointment.value.appointmentAt != null) {
+      await getTimes(date: appointment.value.appointmentAt);
+    }
   }
 
   void selectAppointmentType(value){

@@ -136,28 +136,28 @@ class MainDrawerWidget extends StatelessWidget {
             },
           ),
 
-          DrawerLinkWidget(
-            icon: Icons.favorite_outline,
-            text: "Favorites",
-            onTap: (e) async {
-              await Get.offAndToNamed(Routes.FAVORITES);
-            },
-          ),
-          DrawerLinkWidget(
-            icon: Icons.chat_outlined,
-            text: "Messages",
-            onTap: (e) async {
-              Get.back();
-              await Get.find<RootController>().changePage(2);
-            },
-          ),
-          DrawerLinkWidget(
-            icon: Icons.account_balance_wallet_outlined,
-            text: "Wallets",
-            onTap: (e) async {
-              await Get.offAndToNamed(Routes.WALLETS);
-            },
-          ),
+          // DrawerLinkWidget(
+          //   icon: Icons.favorite_outline,
+          //   text: "Favorites",
+          //   onTap: (e) async {
+          //     await Get.offAndToNamed(Routes.FAVORITES);
+          //   },
+          // ),
+          // DrawerLinkWidget(
+          //   icon: Icons.chat_outlined,
+          //   text: "Messages",
+          //   onTap: (e) async {
+          //     Get.back();
+          //     await Get.find<RootController>().changePage(2);
+          //   },
+          // ),
+          // DrawerLinkWidget(
+          //   icon: Icons.account_balance_wallet_outlined,
+          //   text: "Wallets",
+          //   onTap: (e) async {
+          //     await Get.offAndToNamed(Routes.WALLETS);
+          //   },
+          // ),
           Divider(color: Colors.black),
           DrawerLinkWidget(
             icon: Icons.settings_outlined,

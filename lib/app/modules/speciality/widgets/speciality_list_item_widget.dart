@@ -22,19 +22,20 @@ class SpecialityListItemWidget extends StatelessWidget {
       decoration: Ui.getBoxDecoration(
           border: Border.fromBorderSide(BorderSide.none),
           gradient: new LinearGradient(
-              colors: [Colors.purple.withOpacity(0.7), Colors.purple.withOpacity(0.1)],
+              colors: [speciality.color.withOpacity(0.6), speciality.color.withOpacity(0.1)],
               begin: AlignmentDirectional.topStart,
               //const FractionalOffset(1, 0),
               end: AlignmentDirectional.topEnd,
               stops: [0.0, 0.5],
               tileMode: TileMode.clamp)),
       child: Theme(
-        data: Get.theme.copyWith(dividerColor: Colors.white),
+        data: Get.theme.copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
+          initiallyExpanded: this.expanded,
           expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
           title: InkWell(
               highlightColor: Colors.transparent,
-              splashColor: Colors.white,
+              splashColor: Get.theme.colorScheme.secondary.withOpacity(0.08),
               onTap: () {
                 Get.toNamed(Routes.SPECIALITY, arguments: speciality);
                 //Navigator.of(context).pushNamed('/Details', arguments: RouteArgument(id: '0', param: market.id, heroTag: heroTag));
@@ -47,19 +48,19 @@ class SpecialityListItemWidget extends StatelessWidget {
                     height: 60,
                     child: (speciality.image.url.toLowerCase().endsWith('.svg')
                         ? SvgPicture.network(
-                            speciality.image.url,
-                            color: Colors.yellow,
-                            height: 100,
-                          )
+                      speciality.image.url,
+                      color: speciality.color,
+                      height: 100,
+                    )
                         : CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: speciality.image.url,
-                            placeholder: (context, url) => Image.asset(
-                              'assets/img/loading.gif',
-                              fit: BoxFit.cover,
-                            ),
-                            errorWidget: (context, url, error) => Icon(Icons.error_outline),
-                          )),
+                      fit: BoxFit.cover,
+                      imageUrl: speciality.image.url,
+                      placeholder: (context, url) => Image.asset(
+                        'assets/img/loading.gif',
+                        fit: BoxFit.cover,
+                      ),
+                      errorWidget: (context, url, error) => Icon(Icons.error_outline),
+                    )),
                   ),
                   SizedBox(width: 10),
                   Expanded(
@@ -72,10 +73,10 @@ class SpecialityListItemWidget extends StatelessWidget {
                   ),
                   // TODO get doctor for each speciality
                   // Text(
-                  //   speciality.doctors.length.toString(),
+                  //   "(" + speciality.doctors.length.toString() + ")",
                   //   overflow: TextOverflow.fade,
                   //   softWrap: false,
-                  //   style: Get.textTheme.caption.merge(TextStyle(color: Colors.grey, fontSize: 20,fontWeight: FontWeight.bold)),
+                  //   style: Get.textTheme.caption,
                   // ),
                 ],
               )),
@@ -91,8 +92,8 @@ class SpecialityListItemWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Get.theme.scaffoldBackgroundColor.withOpacity(0.2),
                   border: Border(top: BorderSide(color: Get.theme.scaffoldBackgroundColor.withOpacity(0.3))
-                      // color: Get.theme.focusColor.withOpacity(0.2),
-                      ),
+                    //color: Get.theme.focusColor.withOpacity(0.2),
+                  ),
                 ),
               ),
             );

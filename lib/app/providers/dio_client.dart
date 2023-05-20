@@ -222,7 +222,7 @@ class DioClient {
     } on FormatException catch (_) {
       throw FormatException("Unable to process the data");
     } catch (e) {
-      throw NetworkExceptions.getDioException(e);
+      throw NetworkExceptions.getDioException(200);
     } finally {
       _endProgress(programInfo);
     }

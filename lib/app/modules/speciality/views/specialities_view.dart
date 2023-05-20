@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -38,7 +39,7 @@ class SpecialitiesView extends GetView<SpecialitiesController> {
             children: [
               HomeSearchBarWidget(),
               Padding(
-                padding: const EdgeInsets.only(left: 20, right: 10),
+                padding: const EdgeInsets.only(left: 20, right: 10,),
                 child: Row(children: [
                   Expanded(
                     child: Text(

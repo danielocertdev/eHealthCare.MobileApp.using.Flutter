@@ -75,7 +75,7 @@ abstract class NetworkExceptions {
       if (error.toString().contains("is not a subtype of")) {
         return "Unable to process the data";
       } else {
-        return "Unexpected error occurred";
+        return "Canceled this tiket unhappy";
       }
     }
   }

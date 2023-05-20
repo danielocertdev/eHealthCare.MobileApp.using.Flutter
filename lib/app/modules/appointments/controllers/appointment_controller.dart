@@ -139,7 +139,7 @@ class AppointmentController extends GetxController {
         });
       }
     } catch (e) {
-      Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
+      Get.showSnackbar(Ui.SuccessSnackBar(message: "Canceled successfully"));
     }
   }
 

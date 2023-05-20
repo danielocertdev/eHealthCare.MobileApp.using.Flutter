@@ -27,66 +27,66 @@ class BookDoctorView extends GetView<BookDoctorController> {
         }
       },
       child: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              "Complete your Appointment".tr,
-              style: context.textTheme.headline6,
-            ),
-            centerTitle: true,
-            backgroundColor: Colors.transparent,
-            automaticallyImplyLeading: false,
-            leading: new IconButton(
-              icon: new Icon(Icons.arrow_back_ios, color: Get.theme.hintColor),
-              onPressed: () => Get.back(),
-            ),
-            elevation: 0,
+        appBar: AppBar(
+          title: Text(
+            "Complete your Appointment".tr,
+            style: context.textTheme.headline6,
           ),
-          bottomNavigationBar:
-          buildBlockButtonWidget(controller.appointment.value),
-          body: ListView(
-            children: [
-              Obx(() {
-                var _patients = controller.patients;
-                if (_patients.length == 0) {
-                    return Container(
-                      decoration: Ui.getBoxDecoration(),
-                      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(child: Text("Create a Patient".tr, style: Get.textTheme.bodyText1)).paddingOnly(top: 14.0),
-                          MaterialButton(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 14),
-                            onPressed: () {
-                              Get.toNamed(Routes.PATIENT);
-                            },
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
-                            color: Get.theme.colorScheme.secondary
-                                .withOpacity(0.1),
-                            child: Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              spacing: 6,
-                              children: [
-                                Text("Add".tr, style: Get.textTheme.subtitle1),
-                                Icon(
-                                  Icons.add_circle_outline,
-                                  color: Get.theme.colorScheme.secondary,
-                                  size: 20,
-                                ),
-                              ],
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back_ios, color: Get.theme.hintColor),
+            onPressed: () => Get.back(),
+          ),
+          elevation: 0,
+        ),
+        bottomNavigationBar:
+        buildBlockButtonWidget(controller.appointment.value),
+        body: ListView(
+          children: [
+            Obx(() {
+              var _patients = controller.patients;
+              if (_patients.length == 0) {
+                return Container(
+                  decoration: Ui.getBoxDecoration(),
+                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(child: Text("Create a Patient".tr, style: Get.textTheme.bodyText1)).paddingOnly(top: 14.0),
+                      MaterialButton(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 14),
+                        onPressed: () {
+                          Get.toNamed(Routes.PATIENT);
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        color: Get.theme.colorScheme.secondary
+                            .withOpacity(0.1),
+                        child: Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          spacing: 6,
+                          children: [
+                            Text("Add".tr, style: Get.textTheme.subtitle1),
+                            Icon(
+                              Icons.add_circle_outline,
+                              color: Get.theme.colorScheme.secondary,
+                              size: 20,
                             ),
-                            elevation: 0,
-                          ),
-                        ],
+                          ],
+                        ),
+                        elevation: 0,
                       ),
-                    );
-                }
-                else {
-                  return Container(
+                    ],
+                  ),
+                );
+              }
+              else {
+                return Container(
                   decoration: Ui.getBoxDecoration(),
                   margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
@@ -218,499 +218,499 @@ class BookDoctorView extends GetView<BookDoctorController> {
                     ),
                   ),
                 );}
-              }),
-              Obx(() {
-                if (!controller.appointment.value.canOnlineConsultation) return SizedBox();
-                return Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  decoration: Ui.getBoxDecoration(
-                      color: controller
-                          .getColor(controller.onlineConsultation.value)),
-                  child: Theme(
-                    data: ThemeData(
-                      toggleableActiveColor: Get.theme.primaryColor,
-                    ),
-                    child: RadioListTile(
-                      value: true,
-                      groupValue: controller.onlineConsultation.value,
-                      onChanged: (value) {
-                        controller.toggleOnline(value);
-                      },
-                      title: Text("Online Consultation".tr,
-                          style: controller.getTextTheme(
-                              controller.onlineConsultation.value))
-                          .paddingSymmetric(vertical: 20),
-                    ),
+            }),
+            Obx(() {
+              if (!controller.appointment.value.canOnlineConsultation) return SizedBox();
+              return Container(
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                decoration: Ui.getBoxDecoration(
+                    color: controller
+                        .getColor(controller.onlineConsultation.value)),
+                child: Theme(
+                  data: ThemeData(
+                    toggleableActiveColor: Get.theme.primaryColor,
                   ),
-                );
-              }),
-              Obx(() {
-                if (!controller.appointment.value.canAppointmentAtClinic)
-                  return SizedBox();
-                return Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  decoration: Ui.getBoxDecoration(
-                      color: controller.getColor(controller.atClinic.value)),
-                  child: Theme(
-                    data: ThemeData(
-                      toggleableActiveColor: Get.theme.primaryColor,
-                    ),
-                    child: RadioListTile(
-                      value: true,
-                      groupValue: controller.atClinic.value,
-                      onChanged: (value) {
-                        controller.appointment.update((val) {
-                          val.address = null;
-                          //Get.find<TabBarController>(tag: 'addresses').selectedId = RxString("");
-                        });
-                        controller.toggleAtClinic(value);
-                      },
-                      title: Text("At Clinic".tr,
-                          style: controller
-                              .getTextTheme(controller.atClinic.value))
-                          .paddingSymmetric(vertical: 20),
-                    ),
-                  ),
-                );
-              }),
-              Obx(() {
-                if (!controller.appointment.value
-                    .canAppointmentAtCustomerAddress) return SizedBox();
-                return Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  decoration: Ui.getBoxDecoration(
-                      color: controller.getColor(controller.atAddress.value)),
-                  child: Theme(
-                    data: ThemeData(
-                      toggleableActiveColor: Get.theme.primaryColor,
-                    ),
-                    child: RadioListTile(
-                      value: true,
-                      groupValue: controller.atAddress.value,
-                      onChanged: (value) {
-                        controller.toggleAtAddress(value);
-                      },
-                      title: Text("At your address".tr,
-                          style: controller
-                              .getTextTheme(controller.atAddress.value))
-                          .paddingSymmetric(vertical: 20),
-                    ),
-                  ),
-                );
-              }),
-              Obx(() {
-                return AnimatedOpacity(
-                  opacity: controller.atAddress.value ? 1 : 0,
-                  duration: Duration(milliseconds: 300),
-                  child: AnimatedContainer(
-                    height: controller.atAddress.value ? 230 : 0,
-                    duration: Duration(milliseconds: 300),
-                    margin: EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: controller.atClinic.value ? 0 : 10),
-                    padding: EdgeInsets.symmetric(
-                        vertical: controller.atClinic.value ? 0 : 20),
-                    decoration: Ui.getBoxDecoration(),
-                    child: ListView(
-                      primary: false,
-                      shrinkWrap: true,
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(width: 20),
-                            Expanded(
-                                child: Text("Your Addresses".tr,
-                                    style: Get.textTheme.bodyText1)),
-                            SizedBox(width: 4),
-                            MaterialButton(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 14),
-                              onPressed: () {
-                                Get.toNamed(Routes.SETTINGS_ADDRESS_PICKER);
-                              },
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                              color: Get.theme.colorScheme.secondary
-                                  .withOpacity(0.1),
-                              child: Wrap(
-                                crossAxisAlignment: WrapCrossAlignment.center,
-                                spacing: 6,
-                                children: [
-                                  Text("New".tr,
-                                      style: Get.textTheme.subtitle1),
-                                  Icon(
-                                    Icons.my_location,
-                                    color: Get.theme.colorScheme.secondary,
-                                    size: 20,
-                                  ),
-                                ],
-                              ),
-                              elevation: 0,
-                            ),
-                            SizedBox(width: 20),
-                          ],
-                        ),
-                        SizedBox(height: 10),
-                        Obx(() {
-                          if (controller.addresses.isEmpty) {
-                            return TabBarLoadingWidget();
-                          } else {
-                            return TabBarWidget(
-                              initialSelectedId: "",
-                              tag: 'addresses',
-                              tabs: List.generate(controller.addresses.length,
-                                      (index) {
-                                    final _address =
-                                    controller.addresses.elementAt(index);
-                                    return ChipWidget(
-                                      tag: 'addresses',
-                                      text: _address.getDescription,
-                                      id: index,
-                                      onSelected: (id) {
-                                        controller.appointment.update((val) {
-                                          val.address = _address;
-                                        });
-                                        Get.find<SettingsService>().address.value =
-                                            _address;
-                                      },
-                                    );
-                                  }),
-                            );
-                          }
-                        }),
-                        SizedBox(height: 15),
-                        Row(
-                          children: [
-                            SizedBox(width: 20),
-                            Icon(Icons.place_outlined,
-                                color: Get.theme.focusColor),
-                            SizedBox(width: 15),
-                            Expanded(
-                              child: Obx(() {
-                                return Text(
-                                    controller.appointment.value.address
-                                        ?.address ??
-                                        "Select an address".tr,
-                                    style: Get.textTheme.bodyText2);
-                              }),
-                            ),
-                            SizedBox(width: 20),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              }),
-              Container(
-                decoration: Ui.getBoxDecoration(),
-                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      child: DatePicker(
-                        DateTime.now(),
-                        width: 60,
-                        height: 90,
-                        daysCount: 30,
-                        controller: controller.datePickerController,
-                        initialSelectedDate: DateTime.now(),
-                        selectionColor: Get.theme.colorScheme.secondary,
-                        selectedTextColor: Get.theme.primaryColor,
-                        locale: Get.locale.toString(),
-                        onDateChange: (date) async {
-                          // New date selected
-                          Get.find<TabBarController>(tag: 'hours')
-                              .selectedId
-                              .value = "";
-                          await controller.getTimes(date: date);
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 10, bottom: 5, left: 20, right: 20),
-                      child: Text("Morning".tr, style: Get.textTheme.bodyText2),
-                    ),
-                    Obx(() {
-                      if (controller.morningTimes.isEmpty) {
-                        return TabBarLoadingWidget();
-                      } else {
-                        return TabBarWidget(
-                          initialSelectedId: "",
-                          tag: 'hours',
-                          tabs: List.generate(controller.morningTimes.length,
-                                  (index) {
-                                final _time = controller.morningTimes
-                                    .elementAt(index)
-                                    .elementAt(0);
-                                bool _available = controller.morningTimes
-                                    .elementAt(index)
-                                    .elementAt(1);
-                                if (_available) {
-                                  return ChipWidget(
-                                    backgroundColor: Get.theme.colorScheme.secondary
-                                        .withOpacity(0.2),
-                                    style: Get.textTheme.bodyText1.merge(TextStyle(
-                                        color: Get.theme.colorScheme.secondary)),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 15),
-                                    tag: 'hours',
-                                    text: DateFormat('HH:mm')
-                                        .format(DateTime.parse(_time).toLocal()),
-                                    id: _time,
-                                    onSelected: (id) {
-                                      controller.appointment.update((val) {
-                                        val.appointmentAt =
-                                            DateTime.parse(id).toLocal();
-                                      });
-                                    },
-                                  );
-                                } else {
-                                  return RawChip(
-                                    elevation: 0,
-                                    label: Text(
-                                        DateFormat('HH:mm').format(
-                                            DateTime.parse(_time).toLocal()),
-                                        style: Get.textTheme.caption),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 15),
-                                    backgroundColor:
-                                    Get.theme.focusColor.withOpacity(0.1),
-                                    selectedColor: Get.theme.colorScheme.secondary,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10)),
-                                    showCheckmark: false,
-                                    pressElevation: 0,
-                                  ).marginSymmetric(horizontal: 5);
-                                }
-                              }),
-                        );
-                      }
-                    }),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 10, bottom: 5, left: 20, right: 20),
-                      child:
-                      Text("Afternoon".tr, style: Get.textTheme.bodyText2),
-                    ),
-                    Obx(() {
-                      if (controller.afternoonTimes.isEmpty) {
-                        return TabBarLoadingWidget();
-                      } else {
-                        return TabBarWidget(
-                          initialSelectedId: "",
-                          tag: 'hours',
-                          tabs: List.generate(controller.afternoonTimes.length,
-                                  (index) {
-                                final _time = controller.afternoonTimes
-                                    .elementAt(index)
-                                    .elementAt(0);
-                                bool _available = controller.afternoonTimes
-                                    .elementAt(index)
-                                    .elementAt(1);
-                                if (_available) {
-                                  return ChipWidget(
-                                    backgroundColor: Get.theme.colorScheme.secondary
-                                        .withOpacity(0.2),
-                                    style: Get.textTheme.bodyText1.merge(TextStyle(
-                                        color: Get.theme.colorScheme.secondary)),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 15),
-                                    tag: 'hours',
-                                    text: DateFormat('HH:mm')
-                                        .format(DateTime.parse(_time).toLocal()),
-                                    id: _time,
-                                    onSelected: (id) {
-                                      controller.appointment.update((val) {
-                                        val.appointmentAt =
-                                            DateTime.parse(id).toLocal();
-                                      });
-                                    },
-                                  );
-                                } else {
-                                  return RawChip(
-                                    elevation: 0,
-                                    label: Text(
-                                        DateFormat('HH:mm').format(
-                                            DateTime.parse(_time).toLocal()),
-                                        style: Get.textTheme.caption),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 15),
-                                    backgroundColor:
-                                    Get.theme.focusColor.withOpacity(0.1),
-                                    selectedColor: Get.theme.colorScheme.secondary,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10)),
-                                    showCheckmark: false,
-                                    pressElevation: 0,
-                                  ).marginSymmetric(horizontal: 5);
-                                }
-                              }),
-                        );
-                      }
-                    }),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 10, bottom: 5, left: 20, right: 20),
-                      child: Text("Evening".tr, style: Get.textTheme.bodyText2),
-                    ),
-                    Obx(() {
-                      if (controller.eveningTimes.isEmpty) {
-                        return TabBarLoadingWidget();
-                      } else {
-                        return TabBarWidget(
-                          initialSelectedId: "",
-                          tag: 'hours',
-                          tabs: List.generate(controller.eveningTimes.length,
-                                  (index) {
-                                final _time = controller.eveningTimes
-                                    .elementAt(index)
-                                    .elementAt(0);
-                                bool _available = controller.eveningTimes
-                                    .elementAt(index)
-                                    .elementAt(1);
-                                if (_available) {
-                                  return ChipWidget(
-                                    backgroundColor: Get.theme.colorScheme.secondary
-                                        .withOpacity(0.2),
-                                    style: Get.textTheme.bodyText1.merge(TextStyle(
-                                        color: Get.theme.colorScheme.secondary)),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 15),
-                                    tag: 'hours',
-                                    text: DateFormat('HH:mm')
-                                        .format(DateTime.parse(_time).toLocal()),
-                                    id: _time,
-                                    onSelected: (id) {
-                                      controller.appointment.update((val) {
-                                        val.appointmentAt =
-                                            DateTime.parse(id).toLocal();
-                                      });
-                                    },
-                                  );
-                                } else {
-                                  return RawChip(
-                                    elevation: 0,
-                                    label: Text(
-                                        DateFormat('HH:mm').format(
-                                            DateTime.parse(_time).toLocal()),
-                                        style: Get.textTheme.caption),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 15),
-                                    backgroundColor:
-                                    Get.theme.focusColor.withOpacity(0.1),
-                                    selectedColor: Get.theme.colorScheme.secondary,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10)),
-                                    showCheckmark: false,
-                                    pressElevation: 0,
-                                  ).marginSymmetric(horizontal: 5);
-                                }
-                              }),
-                        );
-                      }
-                    }),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 10, bottom: 5, left: 20, right: 20),
-                      child: Text("Night".tr, style: Get.textTheme.bodyText2),
-                    ),
-                    Obx(() {
-                      if (controller.nightTimes.isEmpty) {
-                        return TabBarLoadingWidget();
-                      } else {
-                        return TabBarWidget(
-                          initialSelectedId: "",
-                          tag: 'hours',
-                          tabs: List.generate(controller.nightTimes.length,
-                                  (index) {
-                                final _time = controller.nightTimes
-                                    .elementAt(index)
-                                    .elementAt(0);
-                                bool _available = controller.nightTimes
-                                    .elementAt(index)
-                                    .elementAt(1);
-                                if (_available) {
-                                  return ChipWidget(
-                                    backgroundColor: Get.theme.colorScheme.secondary
-                                        .withOpacity(0.2),
-                                    style: Get.textTheme.bodyText1.merge(TextStyle(
-                                        color: Get.theme.colorScheme.secondary)),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 15),
-                                    tag: 'hours',
-                                    text: DateFormat('HH:mm')
-                                        .format(DateTime.parse(_time).toLocal()),
-                                    id: _time,
-                                    onSelected: (id) {
-                                      controller.appointment.update((val) {
-                                        val.appointmentAt =
-                                            DateTime.parse(id).toLocal();
-                                      });
-                                    },
-                                  );
-                                } else {
-                                  return RawChip(
-                                    elevation: 0,
-                                    label: Text(
-                                        DateFormat('HH:mm').format(
-                                            DateTime.parse(_time).toLocal()),
-                                        style: Get.textTheme.caption),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 15),
-                                    backgroundColor:
-                                    Get.theme.focusColor.withOpacity(0.1),
-                                    selectedColor: Get.theme.colorScheme.secondary,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10)),
-                                    showCheckmark: false,
-                                    pressElevation: 0,
-                                  ).marginSymmetric(horizontal: 5);
-                                }
-                              }),
-                        );
-                      }
-                    }),
-                  ],
-                ),
-              ),
-              TextFieldWidget(
-                onChanged: (input) => controller.appointment.value.hint = input,
-                hintText:
-                "Is there anything else you would like us to know?".tr,
-                labelText: "Hint".tr,
-                iconData: Icons.description_outlined,
-              ),
-              Obx(() {
-                return TextFieldWidget(
-                  onChanged: (input) =>
-                  controller.appointment.value.coupon.code = input,
-                  hintText: "COUPON01".tr,
-                  labelText: "Coupon Code".tr,
-                  errorText: controller.getValidationMessage(),
-                  iconData: Icons.confirmation_number_outlined,
-                  style: Get.textTheme.bodyText2.merge(TextStyle(
-                      color: controller.getValidationMessage() != null
-                          ? Colors.redAccent
-                          : Colors.green)),
-                  suffixIcon: MaterialButton(
-                    onPressed: () {
-                      controller.validateCoupon();
+                  child: RadioListTile(
+                    value: true,
+                    groupValue: controller.onlineConsultation.value,
+                    onChanged: (value) {
+                      controller.toggleOnline(value);
                     },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
-                    color: Get.theme.focusColor.withOpacity(0.1),
-                    child: Text("Apply".tr, style: Get.textTheme.bodyText1),
-                    elevation: 0,
-                  ).marginSymmetric(vertical: 4),
-                );
-              }),
-            ],
-          ),),
+                    title: Text("Online Consultation".tr,
+                        style: controller.getTextTheme(
+                            controller.onlineConsultation.value))
+                        .paddingSymmetric(vertical: 20),
+                  ),
+                ),
+              );
+            }),
+            Obx(() {
+              if (!controller.appointment.value.canAppointmentAtClinic)
+                return SizedBox();
+              return Container(
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                decoration: Ui.getBoxDecoration(
+                    color: controller.getColor(controller.atClinic.value)),
+                child: Theme(
+                  data: ThemeData(
+                    toggleableActiveColor: Get.theme.primaryColor,
+                  ),
+                  child: RadioListTile(
+                    value: true,
+                    groupValue: controller.atClinic.value,
+                    onChanged: (value) {
+                      controller.appointment.update((val) {
+                        val.address = null;
+                        //Get.find<TabBarController>(tag: 'addresses').selectedId = RxString("");
+                      });
+                      controller.toggleAtClinic(value);
+                    },
+                    title: Text("At Clinic".tr,
+                        style: controller
+                            .getTextTheme(controller.atClinic.value))
+                        .paddingSymmetric(vertical: 20),
+                  ),
+                ),
+              );
+            }),
+            Obx(() {
+              if (!controller.appointment.value
+                  .canAppointmentAtCustomerAddress) return SizedBox();
+              return Container(
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                decoration: Ui.getBoxDecoration(
+                    color: controller.getColor(controller.atAddress.value)),
+                child: Theme(
+                  data: ThemeData(
+                    toggleableActiveColor: Get.theme.primaryColor,
+                  ),
+                  child: RadioListTile(
+                    value: true,
+                    groupValue: controller.atAddress.value,
+                    onChanged: (value) {
+                      controller.toggleAtAddress(value);
+                    },
+                    title: Text("At your address".tr,
+                        style: controller
+                            .getTextTheme(controller.atAddress.value))
+                        .paddingSymmetric(vertical: 20),
+                  ),
+                ),
+              );
+            }),
+            Obx(() {
+              return AnimatedOpacity(
+                opacity: controller.atAddress.value ? 1 : 0,
+                duration: Duration(milliseconds: 300),
+                child: AnimatedContainer(
+                  height: controller.atAddress.value ? 230 : 0,
+                  duration: Duration(milliseconds: 300),
+                  margin: EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: controller.atClinic.value ? 0 : 10),
+                  padding: EdgeInsets.symmetric(
+                      vertical: controller.atClinic.value ? 0 : 20),
+                  decoration: Ui.getBoxDecoration(),
+                  child: ListView(
+                    primary: false,
+                    shrinkWrap: true,
+                    children: [
+                      Row(
+                        children: [
+                          SizedBox(width: 20),
+                          Expanded(
+                              child: Text("Your Addresses".tr,
+                                  style: Get.textTheme.bodyText1)),
+                          SizedBox(width: 4),
+                          MaterialButton(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 14),
+                            onPressed: () {
+                              Get.toNamed(Routes.SETTINGS_ADDRESS_PICKER);
+                            },
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            color: Get.theme.colorScheme.secondary
+                                .withOpacity(0.1),
+                            child: Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              spacing: 6,
+                              children: [
+                                Text("New".tr,
+                                    style: Get.textTheme.subtitle1),
+                                Icon(
+                                  Icons.my_location,
+                                  color: Get.theme.colorScheme.secondary,
+                                  size: 20,
+                                ),
+                              ],
+                            ),
+                            elevation: 0,
+                          ),
+                          SizedBox(width: 20),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Obx(() {
+                        if (controller.addresses.isEmpty) {
+                          return TabBarLoadingWidget();
+                        } else {
+                          return TabBarWidget(
+                            initialSelectedId: "",
+                            tag: 'addresses',
+                            tabs: List.generate(controller.addresses.length,
+                                    (index) {
+                                  final _address =
+                                  controller.addresses.elementAt(index);
+                                  return ChipWidget(
+                                    tag: 'addresses',
+                                    text: _address.getDescription,
+                                    id: index,
+                                    onSelected: (id) {
+                                      controller.appointment.update((val) {
+                                        val.address = _address;
+                                      });
+                                      Get.find<SettingsService>().address.value =
+                                          _address;
+                                    },
+                                  );
+                                }),
+                          );
+                        }
+                      }),
+                      SizedBox(height: 15),
+                      Row(
+                        children: [
+                          SizedBox(width: 20),
+                          Icon(Icons.place_outlined,
+                              color: Get.theme.focusColor),
+                          SizedBox(width: 15),
+                          Expanded(
+                            child: Obx(() {
+                              return Text(
+                                  controller.appointment.value.address
+                                      ?.address ??
+                                      "Select an address".tr,
+                                  style: Get.textTheme.bodyText2);
+                            }),
+                          ),
+                          SizedBox(width: 20),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }),
+            Container(
+              decoration: Ui.getBoxDecoration(),
+              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: DatePicker(
+                      DateTime.now(),
+                      width: 60,
+                      height: 90,
+                      daysCount: 30,
+                      controller: controller.datePickerController,
+                      initialSelectedDate: DateTime.now(),
+                      selectionColor: Get.theme.colorScheme.secondary,
+                      selectedTextColor: Get.theme.primaryColor,
+                      locale: Get.locale.toString(),
+                      onDateChange: (date) async {
+                        // New date selected
+                        Get.find<TabBarController>(tag: 'hours')
+                            .selectedId
+                            .value = "";
+                        await controller.getTimes(date: date);
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 10, bottom: 5, left: 20, right: 20),
+                    child: Text("Morning".tr, style: Get.textTheme.bodyText2),
+                  ),
+                  Obx(() {
+                    if (controller.morningTimes.isEmpty) {
+                      return TabBarLoadingWidget();
+                    } else {
+                      return TabBarWidget(
+                        initialSelectedId: "",
+                        tag: 'hours',
+                        tabs: List.generate(controller.morningTimes.length,
+                                (index) {
+                              final _time = controller.morningTimes
+                                  .elementAt(index)
+                                  .elementAt(0);
+                              bool _available = controller.morningTimes
+                                  .elementAt(index)
+                                  .elementAt(1);
+                              if (_available) {
+                                return ChipWidget(
+                                  backgroundColor: Get.theme.colorScheme.secondary
+                                      .withOpacity(0.2),
+                                  style: Get.textTheme.bodyText1.merge(TextStyle(
+                                      color: Get.theme.colorScheme.secondary)),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 15),
+                                  tag: 'hours',
+                                  text: DateFormat('HH:mm')
+                                      .format(DateTime.parse(_time).toLocal()),
+                                  id: _time,
+                                  onSelected: (id) {
+                                    controller.appointment.update((val) {
+                                      val.appointmentAt =
+                                          DateTime.parse(id).toLocal();
+                                    });
+                                  },
+                                );
+                              } else {
+                                return RawChip(
+                                  elevation: 0,
+                                  label: Text(
+                                      DateFormat('HH:mm').format(
+                                          DateTime.parse(_time).toLocal()),
+                                      style: Get.textTheme.caption),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 15),
+                                  backgroundColor:
+                                  Get.theme.focusColor.withOpacity(0.1),
+                                  selectedColor: Get.theme.colorScheme.secondary,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  showCheckmark: false,
+                                  pressElevation: 0,
+                                ).marginSymmetric(horizontal: 5);
+                              }
+                            }),
+                      );
+                    }
+                  }),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 10, bottom: 5, left: 20, right: 20),
+                    child:
+                    Text("Afternoon".tr, style: Get.textTheme.bodyText2),
+                  ),
+                  Obx(() {
+                    if (controller.afternoonTimes.isEmpty) {
+                      return TabBarLoadingWidget();
+                    } else {
+                      return TabBarWidget(
+                        initialSelectedId: "",
+                        tag: 'hours',
+                        tabs: List.generate(controller.afternoonTimes.length,
+                                (index) {
+                              final _time = controller.afternoonTimes
+                                  .elementAt(index)
+                                  .elementAt(0);
+                              bool _available = controller.afternoonTimes
+                                  .elementAt(index)
+                                  .elementAt(1);
+                              if (_available) {
+                                return ChipWidget(
+                                  backgroundColor: Get.theme.colorScheme.secondary
+                                      .withOpacity(0.2),
+                                  style: Get.textTheme.bodyText1.merge(TextStyle(
+                                      color: Get.theme.colorScheme.secondary)),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 15),
+                                  tag: 'hours',
+                                  text: DateFormat('HH:mm')
+                                      .format(DateTime.parse(_time).toLocal()),
+                                  id: _time,
+                                  onSelected: (id) {
+                                    controller.appointment.update((val) {
+                                      val.appointmentAt =
+                                          DateTime.parse(id).toLocal();
+                                    });
+                                  },
+                                );
+                              } else {
+                                return RawChip(
+                                  elevation: 0,
+                                  label: Text(
+                                      DateFormat('HH:mm').format(
+                                          DateTime.parse(_time).toLocal()),
+                                      style: Get.textTheme.caption),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 15),
+                                  backgroundColor:
+                                  Get.theme.focusColor.withOpacity(0.1),
+                                  selectedColor: Get.theme.colorScheme.secondary,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  showCheckmark: false,
+                                  pressElevation: 0,
+                                ).marginSymmetric(horizontal: 5);
+                              }
+                            }),
+                      );
+                    }
+                  }),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 10, bottom: 5, left: 20, right: 20),
+                    child: Text("Evening".tr, style: Get.textTheme.bodyText2),
+                  ),
+                  Obx(() {
+                    if (controller.eveningTimes.isEmpty) {
+                      return TabBarLoadingWidget();
+                    } else {
+                      return TabBarWidget(
+                        initialSelectedId: "",
+                        tag: 'hours',
+                        tabs: List.generate(controller.eveningTimes.length,
+                                (index) {
+                              final _time = controller.eveningTimes
+                                  .elementAt(index)
+                                  .elementAt(0);
+                              bool _available = controller.eveningTimes
+                                  .elementAt(index)
+                                  .elementAt(1);
+                              if (_available) {
+                                return ChipWidget(
+                                  backgroundColor: Get.theme.colorScheme.secondary
+                                      .withOpacity(0.2),
+                                  style: Get.textTheme.bodyText1.merge(TextStyle(
+                                      color: Get.theme.colorScheme.secondary)),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 15),
+                                  tag: 'hours',
+                                  text: DateFormat('HH:mm')
+                                      .format(DateTime.parse(_time).toLocal()),
+                                  id: _time,
+                                  onSelected: (id) {
+                                    controller.appointment.update((val) {
+                                      val.appointmentAt =
+                                          DateTime.parse(id).toLocal();
+                                    });
+                                  },
+                                );
+                              } else {
+                                return RawChip(
+                                  elevation: 0,
+                                  label: Text(
+                                      DateFormat('HH:mm').format(
+                                          DateTime.parse(_time).toLocal()),
+                                      style: Get.textTheme.caption),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 15),
+                                  backgroundColor:
+                                  Get.theme.focusColor.withOpacity(0.1),
+                                  selectedColor: Get.theme.colorScheme.secondary,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  showCheckmark: false,
+                                  pressElevation: 0,
+                                ).marginSymmetric(horizontal: 5);
+                              }
+                            }),
+                      );
+                    }
+                  }),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 10, bottom: 5, left: 20, right: 20),
+                    child: Text("Night".tr, style: Get.textTheme.bodyText2),
+                  ),
+                  Obx(() {
+                    if (controller.nightTimes.isEmpty) {
+                      return TabBarLoadingWidget();
+                    } else {
+                      return TabBarWidget(
+                        initialSelectedId: "",
+                        tag: 'hours',
+                        tabs: List.generate(controller.nightTimes.length,
+                                (index) {
+                              final _time = controller.nightTimes
+                                  .elementAt(index)
+                                  .elementAt(0);
+                              bool _available = controller.nightTimes
+                                  .elementAt(index)
+                                  .elementAt(1);
+                              if (_available) {
+                                return ChipWidget(
+                                  backgroundColor: Get.theme.colorScheme.secondary
+                                      .withOpacity(0.2),
+                                  style: Get.textTheme.bodyText1.merge(TextStyle(
+                                      color: Get.theme.colorScheme.secondary)),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 15),
+                                  tag: 'hours',
+                                  text: DateFormat('HH:mm')
+                                      .format(DateTime.parse(_time).toLocal()),
+                                  id: _time,
+                                  onSelected: (id) {
+                                    controller.appointment.update((val) {
+                                      val.appointmentAt =
+                                          DateTime.parse(id).toLocal();
+                                    });
+                                  },
+                                );
+                              } else {
+                                return RawChip(
+                                  elevation: 0,
+                                  label: Text(
+                                      DateFormat('HH:mm').format(
+                                          DateTime.parse(_time).toLocal()),
+                                      style: Get.textTheme.caption),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 15),
+                                  backgroundColor:
+                                  Get.theme.focusColor.withOpacity(0.1),
+                                  selectedColor: Get.theme.colorScheme.secondary,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  showCheckmark: false,
+                                  pressElevation: 0,
+                                ).marginSymmetric(horizontal: 5);
+                              }
+                            }),
+                      );
+                    }
+                  }),
+                ],
+              ),
+            ),
+            TextFieldWidget(
+              onChanged: (input) => controller.appointment.value.hint = input,
+              hintText:
+              "".tr,
+              labelText: "What's the reason for your visit?".tr,
+              iconData: Icons.description_outlined,
+            ),
+            Obx(() {
+              return TextFieldWidget(
+                onChanged: (input) =>
+                controller.appointment.value.coupon.code = input,
+                hintText: "CODEXXX".tr,
+                labelText: "Insurance Member ID".tr,
+                errorText: controller.getValidationMessage(),
+                iconData: Icons.confirmation_number_outlined,
+                style: Get.textTheme.bodyText2.merge(TextStyle(
+                    color: controller.getValidationMessage() != null
+                        ? Colors.redAccent
+                        : Colors.green)),
+                suffixIcon: MaterialButton(
+                  onPressed: () {
+                    controller.validateCoupon();
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)),
+                  color: Get.theme.focusColor.withOpacity(0.1),
+                  child: Text("Apply".tr, style: Get.textTheme.bodyText1),
+                  elevation: 0,
+                ).marginSymmetric(vertical: 4),
+              );
+            }),
+          ],
+        ),),
     );
   }
 
@@ -748,19 +748,19 @@ class BookDoctorView extends GetView<BookDoctorController> {
           ),
           color: Get.theme.colorScheme.secondary,
           onPressed: (controller.appointment.value.appointmentAt != null &&
-                      (controller.appointment.value.address != null ||
-                          controller
-                              .appointment.value.canAppointmentAtClinic) &&
-                      Get.isRegistered<TabBarController>(tag: 'hours') &&
-                      Get.find<TabBarController>(tag: 'hours').initialized &&
-                      Get.find<TabBarController>(tag: 'hours')
-                              .selectedId
-                              .value !=
-                          "") &&
-                  controller.appointment.value.patient != null
+              (controller.appointment.value.address != null ||
+                  controller
+                      .appointment.value.canAppointmentAtClinic) &&
+              Get.isRegistered<TabBarController>(tag: 'hours') &&
+              Get.find<TabBarController>(tag: 'hours').initialized &&
+              Get.find<TabBarController>(tag: 'hours')
+                  .selectedId
+                  .value !=
+                  "") &&
+              controller.appointment.value.patient != null
               ? () async {
-                  await Get.toNamed(Routes.APPOINTMENT_SUMMARY);
-                }
+            await Get.toNamed(Routes.APPOINTMENT_SUMMARY);
+          }
               : null,
         ).paddingOnly(right: 20, left: 20);
       }),

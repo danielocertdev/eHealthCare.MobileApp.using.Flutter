@@ -18,18 +18,18 @@ class HomeSearchBarWidget extends StatelessWidget implements PreferredSize {
         decoration: BoxDecoration(
           color: Colors.white,
             border: Border.all(
-              color: Colors.purple.withOpacity(0.2),
+              color: Colors.grey,
             ),
             borderRadius: BorderRadius.circular(10)),
         child: GestureDetector(
-          // onTap: () {
-          //   Get.toNamed(Routes.SEARCH, arguments: controller.heroTag.value);
-          // },
+          onTap: () {
+            Get.toNamed(Routes.SEARCH, arguments: controller.heroTag.value);
+          },
           child: Row(
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(right: 12, left: 0),
-                child: Icon(Icons.search, color: Colors.purple),
+                child: Icon(Icons.search, color: Colors.grey),
               ),
               Expanded(
                 child: Text(

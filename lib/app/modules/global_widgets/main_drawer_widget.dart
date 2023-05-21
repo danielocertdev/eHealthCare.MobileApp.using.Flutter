@@ -191,18 +191,6 @@ class MainDrawerWidget extends StatelessWidget {
               return SizedBox(height: 0);
             }
           }),
-          // if (Get.find<SettingsService>().setting.value.enableVersion)
-          //   ListTile(
-          //     dense: true,
-          //     title: Text(
-          //       "Version".tr + " " + Get.find<SettingsService>().setting.value.appVersion,
-          //       style: Get.textTheme.caption,
-          //     ),
-          //     trailing: Icon(
-          //       Icons.remove,
-          //       color: Get.theme.focusColor.withOpacity(0.3),
-          //     ),
-          //   )
         ],
       ),
     );

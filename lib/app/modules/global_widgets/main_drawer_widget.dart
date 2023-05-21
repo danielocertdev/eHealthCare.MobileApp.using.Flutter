@@ -184,7 +184,7 @@ class MainDrawerWidget extends StatelessWidget {
                   await Get.find<AuthService>().removeCurrentUser();
                   await Get.find<GoogleSignInProvider>().logout();
                   Get.back();
-                  // await Get.find<RootController>().changePage(0);
+                  await Get.find<RootController>().changePage(2);
                 },
               );
             } else {

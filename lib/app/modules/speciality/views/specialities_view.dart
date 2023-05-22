@@ -52,28 +52,6 @@ class SpecialitiesView extends GetView<SpecialitiesController> {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      // IconButton(
-                      //   onPressed: () {
-                      //     controller.layout.value = SpecialitiesLayout.LIST;
-                      //   },
-                      //   icon: Obx(() {
-                      //     return Icon(
-                      //       Icons.format_list_bulleted,
-                      //       color: controller.layout.value == SpecialitiesLayout.LIST ? Get.theme.colorScheme.secondary : Get.theme.focusColor,
-                      //     );
-                      //   }),
-                      // ),
-                      // IconButton(
-                      //   onPressed: () {
-                      //     controller.layout.value = SpecialitiesLayout.GRID;
-                      //   },
-                      //   icon: Obx(() {
-                      //     return Icon(
-                      //       Icons.apps,
-                      //       color: controller.layout.value == SpecialitiesLayout.GRID ? Get.theme.colorScheme.secondary : Get.theme.focusColor,
-                      //     );
-                      //   }),
-                      // )
                     ],
                   ),
                 ]),

@@ -15,8 +15,8 @@ abstract class NetworkExceptions {
         _get.Get.offAllNamed(Routes.LOGIN);
         return "Unauthorized Request";
         break;
-      case 404:
-        return "Not found";
+      // case 404:
+      //   return "Not found";
         break;
       case 409:
         return "Error due to a conflict";
@@ -31,7 +31,7 @@ abstract class NetworkExceptions {
         return "Service unavailable";
         break;
       default:
-        return "Received invalid status code";
+        return "You Canceled this ticket unhappy. What's wrong or Any error?";
     }
   }
 
@@ -75,7 +75,7 @@ abstract class NetworkExceptions {
       if (error.toString().contains("is not a subtype of")) {
         return "Unable to process the data";
       } else {
-        return "Canceled this tiket unhappy";
+        return "You Canceled this ticket unhappy. What's wrong or Any error?";
       }
     }
   }

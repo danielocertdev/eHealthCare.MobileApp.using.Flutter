@@ -539,7 +539,7 @@ class DoctorView extends GetView<DoctorController> {
     if (_doctor?.clinic?.hasData ?? false) {
       return GestureDetector(
         onTap: () {
-          Get.toNamed(Routes.CLINIC, arguments: {'clinic': _doctor.clinic, 'heroTag': 'doctor_details'});
+          // Get.toNamed(Routes.CLINIC, arguments: {'clinic': _doctor.clinic, 'heroTag': 'doctor_details'});
         },
         child: DoctorTilWidget(
           title: Text("Clinic".tr, style: Get.textTheme.subtitle2),

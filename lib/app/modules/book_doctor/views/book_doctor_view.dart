@@ -298,110 +298,110 @@ class BookDoctorView extends GetView<BookDoctorController> {
                 ),
               );
             }),
-            Obx(() {
-              return AnimatedOpacity(
-                opacity: controller.atAddress.value ? 1 : 0,
-                duration: Duration(milliseconds: 300),
-                child: AnimatedContainer(
-                  height: controller.atAddress.value ? 230 : 0,
-                  duration: Duration(milliseconds: 300),
-                  margin: EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: controller.atClinic.value ? 0 : 10),
-                  padding: EdgeInsets.symmetric(
-                      vertical: controller.atClinic.value ? 0 : 20),
-                  decoration: Ui.getBoxDecoration(),
-                  child: ListView(
-                    primary: false,
-                    shrinkWrap: true,
-                    children: [
-                      Row(
-                        children: [
-                          SizedBox(width: 20),
-                          Expanded(
-                              child: Text("Your Addresses".tr,
-                                  style: Get.textTheme.bodyText1)),
-                          SizedBox(width: 4),
-                          MaterialButton(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 14),
-                            onPressed: () {
-                              Get.toNamed(Routes.SETTINGS_ADDRESS_PICKER);
-                            },
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
-                            color: Get.theme.colorScheme.secondary
-                                .withOpacity(0.1),
-                            child: Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              spacing: 6,
-                              children: [
-                                Text("New".tr,
-                                    style: Get.textTheme.subtitle1),
-                                Icon(
-                                  Icons.my_location,
-                                  color: Get.theme.colorScheme.secondary,
-                                  size: 20,
-                                ),
-                              ],
-                            ),
-                            elevation: 0,
-                          ),
-                          SizedBox(width: 20),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Obx(() {
-                        if (controller.addresses.isEmpty) {
-                          return TabBarLoadingWidget();
-                        } else {
-                          return TabBarWidget(
-                            initialSelectedId: "",
-                            tag: 'addresses',
-                            tabs: List.generate(controller.addresses.length,
-                                    (index) {
-                                  final _address =
-                                  controller.addresses.elementAt(index);
-                                  return ChipWidget(
-                                    tag: 'addresses',
-                                    text: _address.getDescription,
-                                    id: index,
-                                    onSelected: (id) {
-                                      controller.appointment.update((val) {
-                                        val.address = _address;
-                                      });
-                                      Get.find<SettingsService>().address.value =
-                                          _address;
-                                    },
-                                  );
-                                }),
-                          );
-                        }
-                      }),
-                      SizedBox(height: 15),
-                      Row(
-                        children: [
-                          SizedBox(width: 20),
-                          Icon(Icons.place_outlined,
-                              color: Get.theme.focusColor),
-                          SizedBox(width: 15),
-                          Expanded(
-                            child: Obx(() {
-                              return Text(
-                                  controller.appointment.value.address
-                                      ?.address ??
-                                      "Select an address".tr,
-                                  style: Get.textTheme.bodyText2);
-                            }),
-                          ),
-                          SizedBox(width: 20),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }),
+            // Obx(() {
+            //   return AnimatedOpacity(
+            //     opacity: controller.atAddress.value ? 1 : 0,
+            //     duration: Duration(milliseconds: 300),
+            //     child: AnimatedContainer(
+            //       height: controller.atAddress.value ? 230 : 0,
+            //       duration: Duration(milliseconds: 300),
+            //       margin: EdgeInsets.symmetric(
+            //           horizontal: 20,
+            //           vertical: controller.atClinic.value ? 0 : 10),
+            //       padding: EdgeInsets.symmetric(
+            //           vertical: controller.atClinic.value ? 0 : 20),
+            //       decoration: Ui.getBoxDecoration(),
+            //       child: ListView(
+            //         primary: false,
+            //         shrinkWrap: true,
+            //         children: [
+            //           Row(
+            //             children: [
+            //               SizedBox(width: 20),
+            //               Expanded(
+            //                   child: Text("Your Addresses".tr,
+            //                       style: Get.textTheme.bodyText1)),
+            //               SizedBox(width: 4),
+            //               MaterialButton(
+            //                 padding: EdgeInsets.symmetric(
+            //                     vertical: 10, horizontal: 14),
+            //                 onPressed: () {
+            //                   // Get.toNamed(Routes.SETTINGS_ADDRESS_PICKER);
+            //                 },
+            //                 shape: RoundedRectangleBorder(
+            //                     borderRadius: BorderRadius.circular(8)),
+            //                 color: Get.theme.colorScheme.secondary
+            //                     .withOpacity(0.1),
+            //                 child: Wrap(
+            //                   crossAxisAlignment: WrapCrossAlignment.center,
+            //                   spacing: 6,
+            //                   children: [
+            //                     Text("New".tr,
+            //                         style: Get.textTheme.subtitle1),
+            //                     Icon(
+            //                       Icons.my_location,
+            //                       color: Get.theme.colorScheme.secondary,
+            //                       size: 20,
+            //                     ),
+            //                   ],
+            //                 ),
+            //                 elevation: 0,
+            //               ),
+            //               SizedBox(width: 20),
+            //             ],
+            //           ),
+            //           SizedBox(height: 10),
+            //           Obx(() {
+            //             if (controller.addresses.isEmpty) {
+            //               return TabBarLoadingWidget();
+            //             } else {
+            //               return TabBarWidget(
+            //                 initialSelectedId: "",
+            //                 tag: 'addresses',
+            //                 tabs: List.generate(controller.addresses.length,
+            //                         (index) {
+            //                       final _address =
+            //                       controller.addresses.elementAt(index);
+            //                       return ChipWidget(
+            //                         tag: 'addresses',
+            //                         text: _address.getDescription,
+            //                         id: index,
+            //                         onSelected: (id) {
+            //                           controller.appointment.update((val) {
+            //                             val.address = _address;
+            //                           });
+            //                           Get.find<SettingsService>().address.value =
+            //                               _address;
+            //                         },
+            //                       );
+            //                     }),
+            //               );
+            //             }
+            //           }),
+            //           SizedBox(height: 15),
+            //           Row(
+            //             children: [
+            //               SizedBox(width: 20),
+            //               Icon(Icons.place_outlined,
+            //                   color: Get.theme.focusColor),
+            //               SizedBox(width: 15),
+            //               Expanded(
+            //                 child: Obx(() {
+            //                   return Text(
+            //                       controller.appointment.value.address
+            //                           ?.address ??
+            //                           "Select an address".tr,
+            //                       style: Get.textTheme.bodyText2);
+            //                 }),
+            //               ),
+            //               SizedBox(width: 20),
+            //             ],
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   );
+            // }),
             Container(
               decoration: Ui.getBoxDecoration(),
               margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),

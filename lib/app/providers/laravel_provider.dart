@@ -930,7 +930,7 @@ class LaravelApiClient extends GetxService with ApiClient {
     if (response.data['success'] == true) {
       return Appointment.fromJson(response.data['data']);
     } else {
-      // throw new Exception(response.data['message']);
+      throw new Exception(response.data['message']);
     }
   }
 

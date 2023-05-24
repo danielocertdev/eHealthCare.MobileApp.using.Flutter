@@ -44,6 +44,7 @@ class SearchController extends GetxController {
   }
 
   Future searchDoctors({String keywords}) async {
+    print(keywords);
     try {
       if (selectedSpecialities.isEmpty) {
         doctors.assignAll(await _doctorRepository.search(keywords, specialities.map((element) => element.id).toList()));

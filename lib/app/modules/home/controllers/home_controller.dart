@@ -75,7 +75,7 @@ class HomeController extends GetxController {
 
   Future getFeatured() async {
     try {
-      // Get.showSnackbar(Ui.SuccessSnackBar(message: "Successfully"));
+      Get.showSnackbar(Ui.SuccessSnackBar(message: "Successfully"));
       featured.assignAll(await _specialityRepository.getFeatured());
     } catch (e) {
       Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
